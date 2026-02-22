@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
 
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  text-align: center;
+}
+
+section {
+  padding: 60px 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+#countdown {
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  font-size: 1.4rem;
+  max-width: 600px;
+  margin: 30px auto;
+  line-height: 1.6;
+}
+
+.timeline {
+  max-width: 700px;
+  margin: 40px auto;
+  position: relative;
+}
+
+.memory {
+  background: rgba(255,255,255,0.2);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  animation: fadeIn 1s ease forwards;
+}
+
+.memory img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #ff4e8d;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<section id="countdown-section">
+  <h1>Countdown to Your Birthday 🎉</h1>
+  <div id="countdown"></div>
+</section>
+
+<section id="main-content" class="hidden">
+  <h1>Happy Birthday ❤️</h1>
+
+  <p class="message">
+    كل سنة وانت أقرب إنسان لقلبي 🤍  
+    وجودك بحياتي نعمة ما كنت متوقعتها،  
+    وكل لحظة معك هي ذكرى بحب أعيشها ألف مرة.
+  </p>
+
+  <div class="timeline">
+
+    <div class="memory">
+      🌊 يوم البحر وضحكنا بدون سبب  
+      <br>
+      <img src="photo1.jpg">
+    </div>
+
+    <div class="memory">
+      🎬 أول فيلم حضرناه سوا  
+      <br>
+      <img src="photo2.jpg">
+    </div>
+
+    <div class="memory">
+      ☕ قهوتنا ومشاكلنا الصغيرة  
+      <br>
+      <img src="photo3.jpg">
+    </div>
+
+  </div>
+
+  <button onclick="playMusic()">اضغط هون 🎵</button>
+  <audio id="music" src="music.mp3"></audio>
+
+</section>
+
+<script>
+const birthday = new Date("March 20, 2026 00:00:00").getTime();
+
+const countdownFunction = setInterval(function() {
+  const now = new Date().getTime();
+  const distance = birthday - now;
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerHTML =
+    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+  if (distance < 0) {
+    clearInterval(countdownFunction);
+    document.getElementById("countdown-section").style.display = "none";
+    document.getElementById("main-content").classList.remove("hidden");
+  }
+}, 1000);
+
+function playMusic() {
+  document.getElementById("music").play();
+}
+</script>
+
+</body>
+</html>
